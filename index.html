@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário da Igreja Presbiteriana</title>
+    <!-- Firebase App (core Firebase SDK) versão 8.x -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Firebase Firestore versão 8.x -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        img {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 8px 0 4px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2f5d8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="https://ipjardimgarcia.ipb.org.br/img/content/jardim_garcia/logos/dab02a4c-81f3-4b16-9d8e-ea00b40b9776_esse%202.webp"
+        alt="Logo Igreja Presbiteriana">
+    <h1>Formulário de Voluntariado</h1>
+    <p>Por favor, preencha o formulário abaixo para indicar seu interesse em participar de atividades da igreja.</p>
+    <form id="formulario">
+        <label for="nome">Nome Completo (obrigatório)</label>
+        <input type="text" id="nome" required>
+
+        <label for="telefone">Telefone (opcional)</label>
+        <input type="text" id="telefone">
+
+        <label for="funcao">Em qual trabalho/função está disposto a trabalhar?</label>
+        <select id="funcao" required onchange="mostrarCampoOutras()">
+            <option value="EBD">EBD</option>
+            <option value="Professor">Professor</option>
+            <option value="Midia">Mídia</option>
+            <option value="outras">Outras</option>
+        </select>
+        <input type="text" id="outrasFuncao" placeholder="Digite a função" style="display: none;">
+
+        <label for="programacao">Quais programações você gostaria que fossem feitas pela igreja em 2025?</label>
+        <textarea id="programacao" rows="4" placeholder="Descreva as programações"></textarea>
+
+        <label for="observacoes">Observações Gerais (opcional)</label>
+        <textarea id="observacoes" rows="3" placeholder="Escreva qualquer observação adicional"></textarea>
+
+        <button type="submit">Enviar</button>
+    </form>
+    <script>
+        // Configuração Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCHA-dNyjbsBJmVejK_tLrAliigLPZJpc8",
+            authDomain: "formipjg.firebaseapp.com",
+            projectId: "formipjg",
+            storageBucket: "formipjg.firebasestorage.app",
+            messagingSenderId: "541291020562",
+            appId: "1:541291020562:web:2c010b005105e85eb2b3cb"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Função para mostrar o campo "outras" quando a opção "outras" for selecionada
+        function mostrarCampoOutras() {
+            const funcao = document.getElementById("funcao").value;
+            const outrasFuncao = document.getElementById("outrasFuncao");
+            if (funcao === "outras") {
+                outrasFuncao.style.display = "block";
+                outrasFuncao.required = true;
+            } else {
+                outrasFuncao.style.display = "none";
+                outrasFuncao.required = false;
+            }
+        }
+
+        // Enviar dados para o Firestore
+        document.getElementById("formulario").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nome = document.getElementById("nome").value;
+            const telefone = document.getElementById("telefone").value;
+            const funcao = document.getElementById("funcao").value;
+            const outrasFuncao = document.getElementById("outrasFuncao").value;
+            const programacao = document.getElementById("programacao").value;
+            const observacoes = document.getElementById("observacoes").value;
+
+            // Dados a serem salvos
+            const novaEntrada = {
+                nome: nome,
+                telefone: telefone || "Não informado",
+                funcao: funcao === "outras" ? outrasFuncao : funcao,
+                programacao: programacao || "Não especificada",
+                observacoes: observacoes || "Não especificadas"
+            };
+
+            // Adicionar à coleção "IPJG"
+            db.collection("IPJG").add(novaEntrada)
+                .then(() => alert('Formulário enviado com sucesso!'))
+                .catch(error => console.error("Erro ao enviar o formulário:", error));
+        });
+    </script>
+</body>
+
+</html>
