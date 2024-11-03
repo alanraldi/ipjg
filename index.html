@@ -10,16 +10,24 @@
     <!-- Firebase Firestore versão 8.x -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <style>
+        /* Estilos Gerais */
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 20px;
+            margin: 0;
+            background-color: #f4f4f9;
         }
 
         form {
-            max-width: 400px;
+            max-width: 500px;
             width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         img {
@@ -27,25 +35,64 @@
             margin-bottom: 20px;
         }
 
+        h1, p {
+            text-align: center;
+            margin: 0 0 15px;
+        }
+
         label {
             display: block;
             margin: 8px 0 4px;
+            font-weight: bold;
+            font-size: 14px;
         }
 
         input,
         textarea,
         select {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
         }
 
         button {
-            padding: 10px 20px;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
             background-color: #2f5d8a;
             color: white;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #244a70;
+        }
+
+        /* Responsividade para Dispositivos Móveis */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -63,22 +110,22 @@
         <input type="text" id="telefone">
 
         <label for="funcao">Em qual trabalho/função está disposto a trabalhar?</label>
-<select id="funcao" required onchange="mostrarCampoOutras()">
-    <option value="EBD">EBD</option>
-    <option value="Professor">Professor</option>
-    <option value="Apoio UCP">Apoio UCP</option>
-    <option value="Apoio UPA">Apoio UPA</option>
-    <option value="Apoio Exame de Contas">Apoio Exame de Contas</option>
-    <option value="Apoio Comissão de Ação Social">Apoio Comissão de Ação Social</option>
-    <option value="Apoio Comissão de Construção">Apoio Comissão de Construção</option>
-    <option value="Apoio Departamento de Música">Apoio Departamento de Música</option>
-    <option value="Sonoplastia">Sonoplastia</option>
-    <option value="Transmissão e Mídia">Transmissão e Mídia</option>
-    <option value="Ajudante Auxiliar de Diaconia">Ajudante Auxiliar de Diaconia</option>
-    <option value="Apoio Evangelização">Apoio Evangelização</option>
-    <option value="Apoio Intercessão">Apoio Intercessão</option>
-    <option value="outras">Outras</option>
-</select>
+        <select id="funcao" required onchange="mostrarCampoOutras()">
+            <option value="EBD">EBD</option>
+            <option value="Professor">Professor</option>
+            <option value="Apoio UCP">Apoio UCP</option>
+            <option value="Apoio UPA">Apoio UPA</option>
+            <option value="Apoio Exame de Contas">Apoio Exame de Contas</option>
+            <option value="Apoio Comissão de Ação Social">Apoio Comissão de Ação Social</option>
+            <option value="Apoio Comissão de Construção">Apoio Comissão de Construção</option>
+            <option value="Apoio Departamento de Música">Apoio Departamento de Música</option>
+            <option value="Sonoplastia">Sonoplastia</option>
+            <option value="Transmissão e Mídia">Transmissão e Mídia</option>
+            <option value="Ajudante Auxiliar de Diaconia">Ajudante Auxiliar de Diaconia</option>
+            <option value="Apoio Evangelização">Apoio Evangelização</option>
+            <option value="Apoio Intercessão">Apoio Intercessão</option>
+            <option value="outras">Outras</option>
+        </select>
         <input type="text" id="outrasFuncao" placeholder="Digite a função" style="display: none;">
 
         <label for="programacao">Quais programações você gostaria que fossem feitas pela igreja em 2025?</label>
