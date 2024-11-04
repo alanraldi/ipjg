@@ -12,10 +12,8 @@
     <style>
         /* Cores do guia de identidade visual */
         :root {
-            --verde-institucional: #006600;
-            /* Verde Institucional */
-            --cinza-institucional: #4d4d4d;
-            /* Cinza Institucional */
+            --verde-institucional: #006600; /* Verde Institucional */
+            --cinza-institucional: #4d4d4d; /* Cinza Institucional */
             --branco: #ffffff;
             --cinza-claro: #f0f0f0;
         }
@@ -30,16 +28,22 @@
             background-color: var(--cinza-claro);
             margin: 0;
             padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #form-container {
+            width: 100%;
+            max-width: 600px;
         }
 
         form {
-            max-width: 450px;
             width: 100%;
             background-color: var(--branco);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
+            box-sizing: border-box;
         }
 
         form:hover {
@@ -127,12 +131,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         /* Responsividade para dispositivos menores */
         @media (max-width: 480px) {
             form {
                 padding: 20px;
+                box-shadow: none;
             }
 
             h1 {
